@@ -7,6 +7,7 @@ A simple and lightweight CLI-based arithmetic calculator by me, Arkan H. Y.
 -Multiplication  
 -Division  
 -Percentage(%) to Decimal Converter  
+-BMI Calculator  
 
 ## How to compile
 cd src  
