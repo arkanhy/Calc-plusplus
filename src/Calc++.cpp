@@ -1,130 +1,239 @@
-#include <iostream>
-#include <string>
-#include <chrono>
-#include <ctime>
-using namespace std;
+    #include <iostream>
+    #include <string>
+    #include <chrono>
+    #include <math.h>
+    #include <ctime>
+    using namespace std;
 
-void wipeterminal(){ //clears the cli interface
-    #ifdef _WIN32
-    system("cls"); //for Windows
-    #else
-    system("clear"); //for UN*X (i use arch btw)
-    #endif
-}
+    void wipeterminal(){ //clears the cli interface
+        #ifdef _WIN32
+        system("cls"); //for Windows
+        #else
+        system("clear"); //for UN*X (i use arch btw)
+        #endif
+    }
 
-int main() {
-    char mode,again;
-    double x,y;
-    
-    do{
-        auto timenow = chrono::system_clock::to_time_t(chrono::system_clock::now()); // clock i totally didn't rip from an obscure forum
-        wipeterminal();
-    
-    cout << "=================== Welcome to Calc++! ==================="<< endl;
-    cout << "It's "<<ctime(&timenow);
-    cout << "A CLI based calculator by Arkan H. Y."<< endl;
-    cout << "Ver. 1.2"<< endl;
-    cout << "Please Input Mode +,-,*,/,%,b(BMI Calc.) or C to close the program"<< endl;
-    cin >> mode;
-    
-    if (mode == '+') {
-        wipeterminal();
-        cout << "=================== Calc++ ==================="<< endl;
-        cout << "(+) Enter Number" << endl;
-        cin >> x;
-        cout << "+" << endl;
-        cin >> y;
-        cout << x << " + " << y << " = " << (x + y) << endl;
-    
-    
-    }else if (mode == '-') { //Subraction
-        wipeterminal();
-        cout << "=================== Calc++ ==================="<< endl;
-        cout << "(-) Enter Number" << endl;
-        cin >> x;
-        cout << "-" << endl;
-        cin >> y;
-        cout << x << " - " << y << " = " << (x - y) << endl;
-    
-    }else if (mode == '*') { //multiplication 
-        wipeterminal();
-        cout << "=================== Calc++ ==================="<< endl;
-        cout << "(*) Enter Number" << endl;
-        cin >> x;
-        cout << "*" << endl;
-        cin >> y;
-        cout << x << " * " << y << " = " << (x * y) << endl;
-    
-    }else if(mode == '/'){ // division
-        wipeterminal();
-        cout << "=================== Calc++ ==================="<< endl;
-        cout << "(÷) Enter Number" << endl;
-        cin >> x;
-        cout << "÷" << endl;
-        cin >> y;
-        if(y == 0){
-        cout <<"Cannot divide by Zero" <<endl;
-        cout <<endl;
-        }else{
-        cout << x << " ÷ " << y << " = " << (x / y) << endl;
+    void Dinput(double &val){ //Wrong input error handler
+        while (true)
+        {
+            cin >> val;
+            if (cin.fail())
+            {
+                cin.clear();
+                cin.ignore(1000, '\n');
+                cout <<"Syntax error, Invalid input. Please Only Enter Numbers\n";
+            }else{
+                break;  
+            }
+            
         }
-    
-    }else if(mode == '%'){ // convert percentage to decimal
-        wipeterminal();
-        cout << "=================== Calc++ ==================="<< endl;
-        cout << "(%)Enter Number" <<endl;
-        cin >> x;
-        cout << x << "% = " <<(x /100) <<endl;
-    
-    }else if(mode == 'b' || mode == 'B'){ // BMI Calc
-        wipeterminal();
-        double w, h, H, b;
-        cout << "=================== Calc++ ==================="<< endl;
-        cout << "(BMI)Enter Weight (KG)" << endl;
-        cin >> w;
-        cout << "Enter Body Height (CM)" << endl;
-        cin >> h;
-        H = h /100;
-        b = w / (H * H);
-        cout << "Your BMI is " << (b) << endl;
-        if(b < 18.5){
-            cout << "You Are Underweight."<< endl;
-            }else if(b < 24.9){
-                cout <<"You Are At Normal Weight"<< endl;
-                }else if(b < 29.9){
-                    cout <<"You Are Overweight" <<endl;
-                    }else if(b <34.9){
-                        cout <<"You are Obese" <<endl;
-                        }else if(b >=35){
-                            cout <<"big chungus" <<endl;  // please change l8ter, people might get mad lol
-                        }
         
-        
+    }
 
-
-    } else if(mode == 'a'){
-        wipeterminal();
-        cout <<"  /\\_/\\ "<< endl;
-        cout <<" (o   o)"<< endl;
-        cout <<"   >-<  "<< endl;
-        return 0;
-
-
-    }else if (mode == 'c' || mode == 'C')
+    void Cinput(char &val){
+        while (true)
     {
+        cin >> val;
+        if (cin.fail())
+        {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout <<"Syntax error, Invalid Input. Please Enter Single Letter";
+
+        }else{
+            break;
+        }
+    }
+    
+        
+}
+    
+
+    int main() {
+        char mode,again,arithmode,scmode,fmode;
+        double x,y,z;
+        string title ="=================== Welcome to Calc++! ===================\n",     menu_title ="======================= Calc++ ========================\n";
+        
+        do{
+            auto timenow = chrono::system_clock::to_time_t(chrono::system_clock::now()); // clock i totally didn't rip from an obscure forum
+            wipeterminal();
+        
+        cout << title;
+        cout << "It's "<<ctime(&timenow);
+        cout << "A CLI based calculator by Arkan H. Y."<< endl;
+        cout << "Ver. 1.3"<< endl;
+        cout << "Please Select Mode A(Arithmatics), S(Scientific), F(Formulas), C(Close)\n";
+        Cinput(mode);
+        
+        if (mode == 'a')
+        {
+            wipeterminal();  
+            cout << menu_title;
+            cout << "Arithmatics Mode" << endl;
+            cout << "Select Operator (+,-,*,/,%)" << endl;
+            Cinput(arithmode);
+
+            if (arithmode =='+')
+            {
+                wipeterminal();
+                cout << menu_title;
+                cout << "(+) Enter Number\n";
+                Dinput(x);
+                cout << "+"<<endl;
+                Dinput(y);
+                cout << x <<" + "<< y << " = "<< x+y <<endl;
+            }else if (arithmode =='-')//substraction
+            {
+                wipeterminal();
+                cout << menu_title;
+                cout <<"(-) Enter Number"<<endl;
+                Dinput(x);
+                cout << "-"<<endl;
+                Dinput(y);
+                cout << x <<" - "<< y << " = " << x-y <<endl;
+            
+            }else if (arithmode =='*')//multiplication
+            {
+                wipeterminal();
+                cout << menu_title;
+                cout <<"(*) Enter Number"<<endl;
+                Dinput(x);
+                cout << "*"<<endl;
+                Dinput(y);
+                cout << x <<" * "<< y << " = " << x*y <<endl;
+            }else if (arithmode=='/')//division
+            {
+                wipeterminal();
+                cout << menu_title;
+                cout <<"(/) Enter Number"<<endl;
+                Dinput(x);
+                cout << "/"<<endl;
+                Dinput(y);
+                if (y==0)
+                {
+                    cout <<"Syntax error. Cannot Divide Zero"<<endl;
+                }else
+                {
+                    cout << x <<" / "<< y << " = " << x/y <<endl;
+                }
+                
+                
+            }else if (arithmode=='%')
+            {
+                wipeterminal();
+                cout << menu_title;
+                cout << "(%)Enter Number" <<endl;
+                Dinput(x);
+                cout << x << "% = " <<(x /100) <<endl;
+            }else//invalid mode
+            {
+                wipeterminal();
+                cout << "invalid mode"<<endl;
+            }
+
+        }else if (mode=='s')//scientific
+        {
+            wipeterminal();
+            cout << menu_title << endl;
+            cout << "Scientific Mode" << endl;
+            cout << "Select Operator (e(Exponent),r(Square Root),q(Quadratic Formula))" << endl;
+            Cinput(scmode);
+
+            if (scmode == 'q') //quadratic formula
+        {
+            wipeterminal();
+            cout << menu_title;
+            cout << "(Quadratic Formula) Enter a"<< endl;
+            Dinput(x);
+            cout << "Enter b" << endl;
+            Dinput(y);
+            cout << "Enter c" << endl;
+            Dinput(z);
+            double D=y*y-4*x*z;
+            if (D== 0)
+            {
+                cout <<"Discriminant is:"<< D << " which is zero, One real solution\n";
+                cout <<"Result of -, x = "<<(-y - sqrt(y * y - 4 * x * z)) / (2 *x)<<endl;
+
+            }else if (D>0)
+            {
+                cout <<"Discriminant is:"<< D << " which is positive, Two real solution\n";
+                cout <<"Result of -, x = "<<(-y - sqrt(y * y - 4 * x * z)) / (2 *x)<<endl;
+                cout <<"Result of +, x = : "<<(-y + sqrt(y * y - 4 * x * z)) / (2 *x)<<endl;
+            }else if (D<0)
+            {
+                cout <<"Discriminant is:"<< D << " which is negative, No real solution"<<endl;
+            }else
+            {
+                cout <<"Syntax Error, Goodluck, you're on your own, God speed son."<<endl;
+            }
+    
+
+
+        }else if(scmode == 'e'){ // exponent
+            wipeterminal();
+            cout << menu_title;
+            cout << "(a^b) Enter base" <<endl;
+            Dinput(x);
+            cout << x << "^ Enter Exponent" <<endl;
+            Dinput(y);
+            cout << pow(x,y) <<endl;
+        }else if (scmode=='r')
+        {
+            wipeterminal();
+            cout << menu_title;
+            cout << "(Sq. Root) Enter Number"<< endl;
+            Dinput(x);
+            cout<< pow(x,0.5)<<endl;
+        }
+        
+        }else if (mode=='f' || mode=='F')//formulas
+        {
+            wipeterminal();
+            cout << menu_title << endl;
+            cout << "Formula Mode" << endl;
+            cout << "Select Formula (b(BMI))" << endl;
+            Cinput(fmode);
+
+            if(fmode == 'b' || fmode== 'B'){ // BMI Calc
+            wipeterminal();
+            double w,h,b;
+            cout << menu_title;
+            cout << "(BMI)Enter Weight (KG)" << endl;
+            Dinput(w);
+            cout << "Enter Body Height (CM)" << endl;
+            Dinput(h);
+            b = w / ((h/100) * (h/100));
+            cout << "Your BMI is " << (b) << endl;
+            if(b < 18.5){
+                cout << "You Are Underweight."<< endl;
+                }else if(b < 24.9){
+                    cout <<"You Are At Normal Weight"<< endl;
+                    }else if(b < 29.9){
+                        cout <<"You Are Overweight" <<endl;
+                        }else if(b <34.9){
+                            cout <<"You are Obese" <<endl;
+                            }else if(b >=35){
+                                cout <<"You are Extremely Obese :o" <<endl;
+                            }
+                        }
+        }
+        
+        else if (mode == 'c' || mode == 'C')
+        {
+            wipeterminal();
+            cout <<"Thanks For Using Calc++."<<endl;
+            return 0;  
+        }else{cout <<endl;
+        cout << "Invalid Mode"<<endl;
+        }
+        cout <<endl;
+        cout <<"Do another Calculation? (Y/N): ";
+        cin >> again;
+        
+        }while (again == 'y' || again == 'Y');
         wipeterminal();
         cout <<"Thanks For Using Calc++."<<endl;
-        return 0;  
-    }else{cout <<endl;
-    cout << "Invalid Mode"<<endl;
-    }
-    cout <<endl;
-    cout <<"Do another Calculation? (Y/N)"<<endl;
-    cin >> again;
-    
-    }while (again == 'y' || again == 'Y');
-    wipeterminal();
-    cout <<"Thanks For Using Calc++."<<endl;
-    }
+        }
     
     

@@ -7,6 +7,9 @@ A simple and lightweight CLI-based arithmetic calculator by me, Arkan H. Y.
 -Multiplication  
 -Division  
 -Percentage(%) to Decimal Converter  
+-Square Root  
+-Exponent  
+-Quadratic Formula  
 -BMI Calculator  
 
 ## How to compile
