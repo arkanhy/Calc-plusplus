@@ -13,7 +13,7 @@ A simple and lightweight CLI-based arithmetic calculator by me, Arkan H. Y.
 -BMI Calculator  
 
 ## How to compile
-cd src  
+cd calcpp  
 g++ Calc++cpp -o calc++  
 sudo cp calc++ /usr/local/bin/  
 
