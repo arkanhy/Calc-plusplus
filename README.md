@@ -14,7 +14,7 @@ A simple and lightweight CLI-based arithmetic calculator by me, Arkan H. Y.
 -Length Converter  
 
 ## How to compile
-cd calcplusplus  
+cd Calcplusplus  
 sudo ./install.sh  
 ## How to run
 calc++  
