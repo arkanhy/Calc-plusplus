@@ -192,7 +192,7 @@
         {
             Menu_title();
             cout << "Formula Mode" << endl;
-            cout << "Select Formula (b(BMI))" << endl;
+            cout << "Select Formula ( b(BMI Calculator), and l(Length Converter))" << endl;
             Cinput(fmode);
 
             if(fmode == 'b' || fmode== 'B'){ // BMI Calc
