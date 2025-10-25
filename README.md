@@ -11,11 +11,10 @@ A simple and lightweight CLI-based arithmetic calculator by me, Arkan H. Y.
 -Exponent  
 -Quadratic Formula  
 -BMI Calculator  
+-Length Converter  
 
 ## How to compile
-cd calcpp  
-g++ Calc++cpp -o calc++  
-sudo cp calc++ /usr/local/bin/  
-
+cd calcplusplus
+sudo ./install.sh  
 ## How to run
 calc++  

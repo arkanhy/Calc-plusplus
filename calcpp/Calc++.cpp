@@ -15,8 +15,7 @@
 
     void Dinput(double &val){ //Wrong input error handler
         while (true)
-        {
-            cin >> val;
+        {   cin >> val;
             if (cin.fail())
             {
                 cin.clear();
@@ -24,29 +23,30 @@
                 cout <<"Syntax error, Invalid input. Please Only Enter Numbers\n";
             }else{
                 break;  
-            }
-            
-        }
-        
+            }   
+        }   
     }
 
     void Cinput(char &val){
         while (true)
-    {
-        cin >> val;
+    {   cin >> val;
         if (cin.fail())
-        {
-            cin.clear();
+        {   cin.clear();
             cin.ignore(1000, '\n');
             cout <<"Syntax error, Invalid Input. Please Enter Single Letter";
-
         }else{
             break;
         }
-    }
-    
-        
+    } 
 }
+    void Menu_title(){
+        auto timenow = chrono::system_clock::to_time_t(chrono::system_clock::now()); // clock i totally didn't rip from an obscure forum
+        wipeterminal();
+        cout << "======================== Calc++ =========================\n";
+        cout << "It's "<<ctime(&timenow);
+        cout << "A CLI based calculator by Arkan H. Y."<< endl;
+        cout << "Ver. 1.4\n";
+    } 
     
 
     int main() {
@@ -61,14 +61,13 @@
         cout << title;
         cout << "It's "<<ctime(&timenow);
         cout << "A CLI based calculator by Arkan H. Y."<< endl;
-        cout << "Ver. 1.3"<< endl;
+        cout << "Ver. 1.4"<< endl;
         cout << "Please Select Mode A(Arithmatics), S(Scientific), F(Formulas), C(Close)\n";
         Cinput(mode);
         
         if (mode == 'a')
         {
-            wipeterminal();  
-            cout << menu_title;
+            Menu_title();
             cout << "Arithmatics Mode" << endl;
             cout << "Select Operator (+,-,*,/,%)" << endl;
             Cinput(arithmode);
@@ -116,8 +115,7 @@
                 {
                     cout << x <<" / "<< y << " = " << x/y <<endl;
                 }
-                
-                
+                   
             }else if (arithmode=='%')
             {
                 wipeterminal();
@@ -128,13 +126,12 @@
             }else//invalid mode
             {
                 wipeterminal();
-                cout << "invalid mode"<<endl;
+                cout << "Invalid mode"<<endl;
             }
 
         }else if (mode=='s')//scientific
         {
-            wipeterminal();
-            cout << menu_title << endl;
+            Menu_title();
             cout << "Scientific Mode" << endl;
             cout << "Select Operator (e(Exponent),r(Square Root),q(Quadratic Formula))" << endl;
             Cinput(scmode);
@@ -168,8 +165,6 @@
                 cout <<"Syntax Error, Goodluck, you're on your own, God speed son."<<endl;
             }
     
-
-
         }else if(scmode == 'e'){ // exponent
             wipeterminal();
             cout << menu_title;
@@ -185,12 +180,17 @@
             cout << "(Sq. Root) Enter Number"<< endl;
             Dinput(x);
             cout<< pow(x,0.5)<<endl;
+        }else if(scmode =='l'){
+            wipeterminal();
+            cout << menu_title;
+            cout << "(Log) Enter Number" <<endl;
+            Dinput(x);
+            cout <<"log of " <<x<< " is "<<log(x)<<endl;
         }
         
         }else if (mode=='f' || mode=='F')//formulas
         {
-            wipeterminal();
-            cout << menu_title << endl;
+            Menu_title();
             cout << "Formula Mode" << endl;
             cout << "Select Formula (b(BMI))" << endl;
             Cinput(fmode);
@@ -216,8 +216,30 @@
                             }else if(b >=35){
                                 cout <<"You are Extremely Obese :o" <<endl;
                             }
-                        }
+            }else if (fmode == 'l' || fmode == 'L'){
+            wipeterminal();
+            cout<<menu_title;
+            cout <<"Length Converter, Please choose what unit you would like to convert I(Inches), C(Centimeters)\n";
+            cin>> mode;
+            if (mode == 'l' || mode == 'I')
+            {
+                wipeterminal();
+                cout<<menu_title;
+                cout <<"Converting Inches to Centimeters. Enter Length\n";
+                Dinput(x);
+                cout <<"It is: "<<x*2.54<<"CM\n";
+
+            }else if (mode == 'c' || mode == 'C')
+            {
+                wipeterminal();
+                cout<<menu_title;
+                cout<<"Converting Centimeters to Inches. Enter Length\n";
+                Dinput(x);
+                cout<<"It is: "<<x*0.3937<<" Inches\n";
+            }
+            }//more unit conversion alright?
         }
+        
         
         else if (mode == 'c' || mode == 'C')
         {
@@ -235,5 +257,3 @@
         wipeterminal();
         cout <<"Thanks For Using Calc++."<<endl;
         }
-    
-    
